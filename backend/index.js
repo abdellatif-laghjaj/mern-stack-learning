@@ -1,12 +1,15 @@
 import express from "express";
-
+import mongoose from "mongoose";
 const app = express();
 
 app.get("/", (req, res) => {
-    console.log("Request", req);
-    res.status(200).send("Hello from Bun!");
-})
+    res.send("Hello World!");
+});
 
-app.listen(process.env.PORT, () => {
-   console.log("Server started at port: " + process.env.PORT);
-})
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => {
+        app.listen(process.env.PORT);
+    })
+    .catch((err) => {
+        console.error(err);
+    })
