@@ -10,7 +10,7 @@ mongoose
     });
   })
   .catch((err) => {
-    console.error(err);
+    console.error("Error connecting to MongoDB:", err.message);
   });
 
 app.use(express.json());
