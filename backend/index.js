@@ -85,7 +85,22 @@ app.put("/books/:id", async (req, res) => {
       publishedYear,
     };
     const result = await Book.findByIdAndUpdate(id, newBook);
-    return result ? res.status(200).send(result) : res.status(404).send({ message: "Book not found" });
+    return result
+      ? res.status(200).send(result)
+      : res.status(404).send({ message: "Book not found" });
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+});
+
+// delete book
+app.delete("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Book.findByIdAndDelete(id);
+    return result
+      ? res.status(200).send(result)
+      : res.status(404).send({ message: "Book not found" });
   } catch (err) {
     return res.status(400).send({ message: err.message });
   }
