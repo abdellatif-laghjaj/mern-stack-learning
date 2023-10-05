@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import Book from "./models/book.js";
 const app = express();
 
 mongoose
@@ -23,8 +24,11 @@ app.get("/", (req, res) => {
 // get all books
 app.get("/books", async (req, res) => {
   try {
-    const books = await Book.find();
-    return res.status(200).send(books);
+    const books = await Book.find({});
+    return res.status(200).json({
+        count: books.length,
+        data: books,
+    });
   } catch (err) {
     res.status(400).send({ message: err.message });
   }
