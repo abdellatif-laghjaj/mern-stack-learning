@@ -20,6 +20,16 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+// get all books
+app.get("/books", async (req, res) => {
+  try {
+    const books = await Book.find();
+    return res.status(200).send(books);
+  } catch (err) {
+    res.status(400).send({ message: err.message });
+  }
+});
+
 // store new book
 app.post("/books", async (req, res) => {
   try {
