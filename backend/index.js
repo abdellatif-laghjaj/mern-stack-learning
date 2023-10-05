@@ -67,3 +67,26 @@ app.post("/books", async (req, res) => {
     res.status(400).send({ message: err.message });
   }
 });
+
+// update book
+app.put("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, author, publishedYear } = req.body;
+
+    if (!title || !author || !publishedYear) {
+      console.error("All fields are required");
+      return res.status(400).send({ message: "All fields are required" });
+    }
+
+    const newBook = {
+      title,
+      author,
+      publishedYear,
+    };
+    const result = await Book.findByIdAndUpdate(id, newBook);
+    return res.status(200).send(result);
+  } catch (err) {
+    return res.status(400).send({ message: err.message });
+  }
+});
