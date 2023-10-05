@@ -1,9 +1,9 @@
 import express from "express";
-import mongoose from "mongoose"; 
+import mongoose from "mongoose";
 import cors from "cors";
 import booksRoute from "./routes/books_route.js";
 
-// create express app
+// Create an instance of an express app
 const app = express();
 
 mongoose
@@ -17,14 +17,14 @@ mongoose
     console.error("Error connecting to MongoDB:", err.message);
   });
 
-app.use(express.json());
+// Use express.json() middleware to parse incoming JSON requests
 
-app.use(cors());
+// Use cors middleware to enable Cross-Origin Resource Sharing
 
-// routes
+// Set up the '/books' route to use the booksRoute
 app.use("/books", booksRoute);
 
-// index
+// Define the root route that sends a 'Hello World!' response
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

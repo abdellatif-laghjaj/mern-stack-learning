@@ -3,7 +3,7 @@ import Book from "../models/book.js";
 
 const router = express.Router();
 
-// get all books
+// Define a route to get all books from the database.
 router.get("/", async (req, res) => {
   try {
     const books = await Book.find({});
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get book by id
+// Define a route to get a book by its id from the database.
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// store new book
+// Define a route to create a new book in the database.
 router.post("/", async (req, res) => {
   try {
     const { title, author, publishedYear } = req.body;
@@ -52,7 +52,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// update book
+// Define a route to update a book by its id in the database.
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -77,7 +77,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// delete book
+// Define a route to delete a book by its id from the database.
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
