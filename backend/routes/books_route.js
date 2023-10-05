@@ -4,7 +4,7 @@ import Book from "../models/book.js";
 const router = express.Router();
 
 // get all books
-router.get("/books", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const books = await Book.find({});
     return res.status(200).json({
@@ -17,7 +17,7 @@ router.get("/books", async (req, res) => {
 });
 
 // get book by id
-router.get("/books/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await Book.findById(id);
@@ -30,7 +30,7 @@ router.get("/books/:id", async (req, res) => {
 });
 
 // store new book
-router.post("/books", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { title, author, publishedYear } = req.body;
     // check if all fields are present
@@ -53,7 +53,7 @@ router.post("/books", async (req, res) => {
 });
 
 // update book
-router.put("/books/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { title, author, publishedYear } = req.body;
@@ -78,7 +78,7 @@ router.put("/books/:id", async (req, res) => {
 });
 
 // delete book
-router.delete("/books/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const result = await Book.findByIdAndDelete(id);
