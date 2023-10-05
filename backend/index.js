@@ -1,5 +1,6 @@
 import express from "express";
-import mongoose from "mongoose";
+import mongoose from "mongoose"; 
+import booksRoute from "./routes/books_route.js";
 import Book from "./models/book.js";
 const app = express();
 
@@ -15,6 +16,9 @@ mongoose
   });
 
 app.use(express.json());
+
+// routes
+app.use("/books", booksRoute);
 
 // index
 app.get("/", (req, res) => {
